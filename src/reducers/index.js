@@ -1,7 +1,9 @@
+import {combineReducers} from 'redux';
 import {
     ADD_RECIPE, 
     REMOVE_FROM_CALENDAR
-} from '../actions';
+} from '../actions'
+// import default from 'react-redux/lib/connect/connect'
 
 const initialCalendarState = {
     monday: {
@@ -74,8 +76,26 @@ function calendar(state = initialCalendarState, action) {
         default:
             return state;
     }
-
-
 }
 
-export default calendar
+/**
+ * Reducer function
+ * @param {*} state 
+ * @param {*} action 
+ */
+function food(state = {}, action) {
+    switch(action.type) {
+        case ADD_RECIPE:
+            const {recipe} = action;
+            return {
+                ...state,
+                [recipe.label]: recipe
+            }
+        default:
+        return state;
+    }
+}
+
+// TODO: The problem with having more than one reducer is that you can only call one, you need to combine them...
+
+export default combineReducers({food, calendar});
