@@ -187,7 +187,7 @@ function mapStateToProps ({food, calendar}) {
     calendar: dayOrder.map((day) => ({
       day,
       meals: Object.keys(calendar[day]).reduce((meals, meal) => {
-        meals[meal] = food[calendar[day][meal]] ? calendar[day][meal] : null
+        meals[meal] = calendar[day][meal] ? food[calendar[day][meal]] : null
         return meals
       }, {})
     })),
